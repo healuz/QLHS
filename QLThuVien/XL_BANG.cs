@@ -53,6 +53,7 @@ namespace QLThuVien
             Doc_bang();
         }
         #endregion
+
         public void Doc_bang()
         {
             if (mChuoi_SQL == null)
@@ -102,10 +103,54 @@ namespace QLThuVien
             }
         }
 
-       private void mBo_Doc_Ghi_RowUpdated(object sender, SqlRowUpdatedEventArgs e)
+        public int Thuc_hien_lenh(String Lenh)
         {
-            throw new NotImplementedException();
+            try
+            {
+                SqlCommand Cau_lenh = new SqlCommand(Lenh, mKet_noi);
+                mKet_noi.Open();
+                int ket_qua = Cau_lenh.ExecuteNonQuery();
+                mKet_noi.Close();
+                return ket_qua;
+            }
+            catch
+            {
+                return -1;
+            }
         }
+
+        public Object Thuc_hien_lenh_tinh_toan(String Lenh)
+        {
+            try
+            {
+                SqlCommand Cau_lenh = new SqlCommand(Lenh, mKet_noi);
+                mKet_noi.Open();
+                Object ket_qua = Cau_lenh.ExecuteScalar();
+                mKet_noi.Close();
+                return ket_qua;
+            }
+            catch
+            {
+                return null;
+            }
+            
+            
+        }
+      
+        private void mBo_Doc_Ghi_RowUpdated(object sender, SqlRowUpdatedEventArgs e)
+        {
+            if(this.PrimaryKey[0].AutoIncrement)
+            {
+                if ((e.Status==UpdateStatus.Continue)&&(e.StatementType == StatementType.Insert))
+                {
+                    SqlCommand cmd = new SqlCommand("Select @@IDENTLY", mKet_noi);
+                    e.Row.ItemArray[0] = cmd.ExecuteScalar();
+                    e.Row.AcceptChanges();
+                }
+            }
+        }
+
+
     }
     
 }

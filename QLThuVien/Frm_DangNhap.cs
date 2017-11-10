@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using QLThuVien.Class_bang;
 
 namespace QLThuVien
 {
@@ -36,6 +37,7 @@ namespace QLThuVien
         private void btnLogin_Click(object sender, EventArgs e)
         {
             if(cbbAuthentication.SelectedIndex==0)
+                
                 
         }
     }
