@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace QLThuVien
 {
-    public partial class Form1 : Form
+    public partial class frm_QLTV : Form
     {
-        public Form1()
+        
+        public frm_QLTV()
         {
             InitializeComponent();
+        }
+
+        private void frm_QLTV_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
